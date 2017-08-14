@@ -22,10 +22,11 @@ public class HigginBothamBookStore implements BookStore {
 	private Map<String, List<Book>> JavaCategoryBooks() {
 
 		Book thiningInJava = new Book("Thinking in Java", "1234567890", "Bruce Eckle", 1120, 789.90);
-		Book completeReference = new Book("Complete Rreference Java", "s", "Herbert Schildt", 126, 789.90);
+		Book completeReference = new Book("Complete Rreference Java", "1234567891", "Herbert Schildt", 126, 789.90);
 		Book quickJava = new Book("Quick Java", "1234567892", "Spencer Bharath", 120, 789.90);
 		Book java8Basics = new Book("Java 8 Basics", "1234567893", "Nitish Bharath", 420, 789.90);
 
+		javaBooks.add(thiningInJava);
 		javaBooks.add(completeReference);
 		javaBooks.add(quickJava);
 		javaBooks.add(java8Basics);
@@ -112,44 +113,39 @@ public class HigginBothamBookStore implements BookStore {
 		Iterator<Map<String, List<Book>>> itr = inventory.iterator();
 		String one = "the book is avalible";
 		String two = "the book is not avalible";
-		boolean result=false;
+		boolean result = true;
 		for (Book book : javaBooks) {
 			if (book.getIsbn().equalsIgnoreCase(isbn)) {
-				result=true;
+				result = !true;
 				System.out.println(one);
 				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-						+ "the number of pages in books are" + book.getNoOfPages() + "the book is written by the author "
-						+ book.getAuthor());
-			
+						+ "the number of pages in books are" + book.getNoOfPages()
+						+ "the book is written by the author " + book.getAuthor());
 
 			} else {
-				result=false;
+				result = !false;
 			}
 
 		}
-		if(!result) {
+		if (result) {
 			System.out.println(two);
-			
-		}
-		// Iterator<Book> itr = javaBooks.iterator();
-		// while (itr.hasNext()) {
 
-		// if (itr.next().getIsbn().contains(isbn)) {
-		// System.out.println("the book is avalible"+itr.);
-		//
-		//
-		// break;
-		// } else {
-		// System.out.println(two);
-		// break;
-		// }
-		// if (itr.next().getIsbn().contains(isbn)) {
-		// System.out.println(one+", the book name is "+itr.next().getTitle());
-		// break;
-		// }
-		// if(!(itr.next().getIsbn().contains(isbn))) {
-		// System.out.println(two);
-		// }
+		}
+	}
+
+	public void getBookNameByTittle(String BookTittle) {
+		boolean getResultForBookTittle = false;
+		for (Book getBook : javaBooks) {
+			getResultForBookTittle = true;
+			if (getBook.getTitle().equalsIgnoreCase(BookTittle)) {
+				System.out.println("the book with this title is avalible");
+			} else {
+				getResultForBookTittle = false;
+			}
+			if (getResultForBookTittle = false) {
+				System.out.println("the book with this title is not avalible");
+			}
+		}
 	}
 
 }
