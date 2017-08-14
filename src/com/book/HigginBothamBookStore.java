@@ -118,7 +118,7 @@ public class HigginBothamBookStore implements BookStore {
 				result=true;
 				System.out.println(one);
 				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-						+ "the number of pages in books are" + book.getNoOfPages() + "the book is written by "
+						+ "the number of pages in books are" + book.getNoOfPages() + "the book is written by the author "
 						+ book.getAuthor());
 			
 
