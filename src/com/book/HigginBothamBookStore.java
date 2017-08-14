@@ -13,10 +13,8 @@ public class HigginBothamBookStore implements BookStore {
 	Set<String> categories = new HashSet<>();
 	List<Map<String, List<Book>>> inventory = new ArrayList<Map<String, List<Book>>>();
 	List<Book> javaBooks = new ArrayList<>();
-
 	public HigginBothamBookStore() {
 		inventory.add(JavaCategoryBooks());
-		// inventory.add(SqlCategoryBooks());
 	}
 
 	private Map<String, List<Book>> JavaCategoryBooks() {
@@ -63,7 +61,7 @@ public class HigginBothamBookStore implements BookStore {
 		Map<String, List<Book>> availableCategory = null;
 		int categoryPosition = 0;
 
-		categories = getAllCategoriesFromInventory();
+		getAllCategoriesFromInventory();
 
 		if (category != null) {
 			if (categories.contains(category)) {
@@ -86,7 +84,7 @@ public class HigginBothamBookStore implements BookStore {
 
 	public void getInventory() {
 
-		categories = getAllCategoriesFromInventory();
+		getAllCategoriesFromInventory();
 		for (String category : categories) {
 			Iterator<Map<String, List<Book>>> itr = inventory.iterator();
 			while (itr.hasNext()) {
@@ -115,13 +113,14 @@ public class HigginBothamBookStore implements BookStore {
 		String two = "the book is not avalible";
 		boolean result = true;
 		for (Book book : javaBooks) {
+
 			if (book.getIsbn().equalsIgnoreCase(isbn)) {
 				result = !true;
 				System.out.println(one);
 				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
 						+ "the number of pages in books are" + book.getNoOfPages()
 						+ "the book is written by the author " + book.getAuthor());
-
+				break;
 			} else {
 				result = !false;
 			}
