@@ -181,6 +181,12 @@ public class HigginBothamBookStore implements BookStore {
 			for (Book books : SpringBooks)
 				System.out.println(books);
 		}
+		if (GetCatagory >= 5) {
+			System.err.println("No Such catagories found");
+		listBookCatogories();
+
+		}
+		
 		System.out.println("Search by 1)ISBN 2)TITLE 3)Author");
 		System.out.println("enter the search method");
 		String getInput = getbook.next();
@@ -492,12 +498,10 @@ public class HigginBothamBookStore implements BookStore {
 				System.out.println("the book with this author is not avalible");
 			}
 		}
-		if(GetCatagory>=5) {
-			System.out.println();
-		}
-		System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-listBookCatogories();
+
+		System.out.println(
+				"------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		listBookCatogories();
 	}
-	
 
 }
