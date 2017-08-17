@@ -4,7 +4,8 @@ public interface BookStore {
 
 	void add(String category, Book book);
 	void getInventory();
-	void listBookCatogories();
-//	public void getBookNameByTittle(String BookTittle);
-//	void getBookOnIsbn();
+	 void getInputFromUser();
+	void listBookCatogories(int getBookByCatagory);
+	 void getCatagories(int SearchBook);
+
 }

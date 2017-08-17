@@ -1,8 +1,10 @@
 package com.book;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class HigginBothamBookStore implements BookStore {
+	
 	Scanner getbook = new Scanner(System.in);
 
 	Set<String> categories = new HashSet<>();
@@ -18,6 +21,7 @@ public class HigginBothamBookStore implements BookStore {
 	List<Book> sqlBooks = new ArrayList<>();
 	List<Book> HTMLBooks = new ArrayList<>();
 	List<Book> SpringBooks = new ArrayList<>();
+	List<Book> selectedBooks;
 
 	public HigginBothamBookStore() {
 		inventory.add(JavaCategoryBooks());
@@ -53,7 +57,7 @@ public class HigginBothamBookStore implements BookStore {
 				126, 789.90);
 		Book SQLServer2012 = new Book("SQL Server 2012 Query Performance Tuning", "12345sql", "Wayne Sheffield", 120,
 				789.90);
-		Book SQLServer2012TSQLRecipes = new Book("SQL Server 2012 T-SQL Recipes, 3rd Edition (2012)", "sqlpp4567",
+		Book SQLServer2012TSQLRecipes = new Book("SQL Server 2012 T-SQL Recipes 3rd Edition (2012)", "sqlpp4567",
 				"Wayne Sheffield", 420, 789.90);
 
 		sqlBooks.add(introToSql);
@@ -159,349 +163,164 @@ public class HigginBothamBookStore implements BookStore {
 		return categories;
 	}
 
-	public void listBookCatogories() {
+	public void getBookByISBN() {
+		boolean getBookISBN = false;
+		System.out.println("enter the ISBN");
+		getbook = new Scanner(System.in);
+		String getISBN = getbook.nextLine();
+		for (Book book : selectedBooks) {
 
+			if (book.getIsbn().equalsIgnoreCase(getISBN)) {
+				getBookISBN = true;
+				System.out.println("the book is avalible");
+				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
+						+ "the number of pages in books are" + book.getNoOfPages()
+						+ "the book is written by the author " + book.getAuthor());
+				break;
+			} else {
+				getBookISBN = false;
+			}
+
+		}
+		if (getBookISBN == false) {
+			System.out.println("the book is not avalible");
+
+		}
+		
+	}
+	public void getInputFromUser() {
+		
 		System.out.println("java books press-1");
 		System.out.println("sql books press-2");
 		System.out.println("HTML books press-3");
 		System.out.println("Spring books press-4");
-		System.out.println("enter the book catogory");
-		int GetCatagory = getbook.nextInt();
-		if (GetCatagory == 1) {
+		
+			System.out.println("enter the book catogory");
+			int GetCatagory = getbook.nextInt();
+			listBookCatogories(GetCatagory);
+	
+		
+	}
+
+	public void getBookByTitle() {
+		
+		boolean getBookTitle = false;
+		System.out.println("enter the Title");
+		getbook = new Scanner(System.in);
+		String getTitle = getbook.nextLine();
+		for (Book book : selectedBooks) {
+
+			if (book.getTitle().equalsIgnoreCase(getTitle)) {
+				getBookTitle = true;
+				System.out.println("the book is avalible");
+				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
+						+ "the number of pages in books are" + book.getNoOfPages()
+						+ "the book is written by the author " + book.getAuthor());
+				break;
+			} else {
+				getBookTitle = false;
+			}
+
+		}
+		if (getBookTitle == false) {
+			System.out.println("the book is not avalible");
+
+		}
+	}
+
+	public void getBookByAuthor() {
+		System.out.println("enter the author name");
+		getbook = new Scanner(System.in);
+		String getAuthor = getbook.nextLine();
+
+		boolean getResultForBookAuthor = false;
+
+		for (Book book : selectedBooks) {
+
+			if (book.getAuthor().equalsIgnoreCase(getAuthor)) {
+				getResultForBookAuthor = true;
+				System.out.println("the book is avalible");
+				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
+
+						+ "the number of pages in books are" + book.getNoOfPages()
+						+ "the book is written by the author " + book.getAuthor());
+
+				break;
+			} else {
+				getResultForBookAuthor = false;
+			}
+
+		}
+		if (getResultForBookAuthor == false) {
+			System.out.println("the book is not avalible");
+
+		}
+	}
+
+	public void listBookCatogories(int getBookByCatagory) {
+
+		int GetCatagory = getBookByCatagory;
+		switch (GetCatagory) {
+		case 1:
+			selectedBooks = javaBooks;
 			for (Book books : javaBooks)
 				System.out.println(books);
 
-		} else if (GetCatagory == 2) {
+			break;
+		case 2:
+			selectedBooks = sqlBooks;
 			for (Book books : sqlBooks)
 				System.out.println(books);
-		} else if (GetCatagory == 3) {
+			break;
+		case 3:
+			selectedBooks = HTMLBooks;
 			for (Book books : HTMLBooks)
 				System.out.println(books);
-		} else if (GetCatagory == 4) {
+			break;
+		case 4:
+			selectedBooks = SpringBooks;
 			for (Book books : SpringBooks)
 				System.out.println(books);
-		}
-		if (GetCatagory >= 5) {
-			System.err.println("No Such catagories found");
-		listBookCatogories();
-
-		}
-		
-		System.out.println("Search by 1)ISBN 2)TITLE 3)Author");
-		System.out.println("enter the search method");
-		String getInput = getbook.next();
-		if (GetCatagory == 1 && getInput.equalsIgnoreCase("isbn")) {
-			System.out.println("Enter the book ISBN to be searched");
-			String getISBN = getbook.next();
-			boolean result = false;
-
-			for (Book book : javaBooks) {
-
-				if (book.getIsbn().equalsIgnoreCase(getISBN)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-							+ "the number of pages in books are" + book.getNoOfPages()
-							+ "the book is written by the author " + book.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-
-		}
-		if (GetCatagory == 1 && getInput.equalsIgnoreCase("title")) {
-			// Scanner sc = new Scanner(System.in);
-			System.out.println("Enter the  Book Tittle to be searched");
-			getbook = new Scanner(System.in);
-			String getTitleofBook = getbook.nextLine();
-			boolean getResultForBookTittle = false;
-
-			for (Book book : javaBooks) {
-
-				if (book.getTitle().equalsIgnoreCase(getTitleofBook)) {
-					getResultForBookTittle = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-							+ "the number of pages in books are" + book.getNoOfPages()
-							+ "the book is written by the author " + book.getAuthor());
-
-					break;
-				} else {
-					getResultForBookTittle = false;
-				}
-
-			}
-			if (getResultForBookTittle == false) {
-				System.out.println("the book is not avalible");
-
-			}
-		}
-		if (GetCatagory == 1 && getInput.equalsIgnoreCase("author")) {
-			boolean getResultForBookTittle1 = false;
-			System.out.println("Enter the book Book Author to be searched");
-			getbook = new Scanner(System.in);
-			String getAuthor = getbook.nextLine();
-
-			for (Book book : javaBooks) {
-
-				if (book.getAuthor().equalsIgnoreCase(getAuthor)) {
-					getResultForBookTittle1 = true;
-					System.out.println("the book with this title is avalible");
-					System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-							+ "the number of pages in books are" + book.getNoOfPages()
-							+ "the book is written by the author " + book.getAuthor());
-					break;
-				} else {
-					getResultForBookTittle1 = false;
-				}
-
-			}
-			if (getResultForBookTittle1 == false) {
-				System.out.println("the book with this title is not avalible");
-			}
-		}
-		if (GetCatagory == 2 && getInput.equalsIgnoreCase("isbn")) {
-			boolean result = false;
-
-			System.out.println("Enter the book ISBN to be searched");
-			getbook = new Scanner(System.in);
-			String getISBNofBook = getbook.nextLine();
-			System.out.println(getISBNofBook);
-			for (Book sqlBook : sqlBooks) {
-
-				if (sqlBook.getIsbn().equalsIgnoreCase(getISBNofBook)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + sqlBook.getTitle() + "the book price is"
-							+ sqlBook.getPrice() + "the number of pages in books are" + sqlBook.getNoOfPages()
-							+ "the book is written by the author " + sqlBook.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-
-		}
-		if (GetCatagory == 2 && getInput.equalsIgnoreCase("title")) {
-			// Scanner sc = new Scanner(System.in);
-			System.out.println("Enter the  Book Tittle to be searched");
-			getbook = new Scanner(System.in);
-			String getTitleofBook = getbook.nextLine();
-			boolean getResultForBookTittle = false;
-
-			for (Book sqlbook : sqlBooks) {
-
-				if (sqlbook.getTitle().equalsIgnoreCase(getTitleofBook)) {
-					getResultForBookTittle = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + sqlbook.getTitle() + "the book price is"
-							+ sqlbook.getPrice() + "the number of pages in books are" + sqlbook.getNoOfPages()
-							+ "the book is written by the author " + sqlbook.getAuthor());
-
-					break;
-				} else {
-					getResultForBookTittle = false;
-				}
-
-			}
-			if (getResultForBookTittle == false) {
-				System.out.println("the book is not avalible");
-
-			}
-		}
-		if (GetCatagory == 2 && getInput.equalsIgnoreCase("author")) {
-			boolean getResultForBookTittle1 = false;
-			System.out.println("Enter the book Book Author to be searched");
-			getbook = new Scanner(System.in);
-			String getAuthor = getbook.nextLine();
-
-			for (Book sqlbook : sqlBooks) {
-
-				if (sqlbook.getAuthor().equalsIgnoreCase(getAuthor)) {
-					getResultForBookTittle1 = true;
-					System.out.println("the book with this author is avalible");
-					System.out.println("the book name is " + sqlbook.getTitle() + "the book price is"
-							+ sqlbook.getPrice() + "the number of pages in books are" + sqlbook.getNoOfPages()
-							+ "the book is written by the author " + sqlbook.getAuthor());
-					break;
-				} else {
-					getResultForBookTittle1 = false;
-				}
-
-			}
-			if (getResultForBookTittle1 == false) {
-				System.out.println("the book with this author is not avalible");
-			}
-		}
-		if (GetCatagory == 3 && getInput.equalsIgnoreCase("isbn")) {
-			boolean result = false;
-
-			System.out.println("Enter the book ISBN to be searched");
-			getbook = new Scanner(System.in);
-			String getISBNofBook = getbook.nextLine();
-			System.out.println(getISBNofBook);
-			for (Book htmlBook : HTMLBooks) {
-
-				if (htmlBook.getIsbn().equalsIgnoreCase(getISBNofBook)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + htmlBook.getTitle() + "the book price is"
-							+ htmlBook.getPrice() + "the number of pages in books are" + htmlBook.getNoOfPages()
-							+ "the book is written by the author " + htmlBook.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-
-		}
-		if (GetCatagory == 3 && getInput.equalsIgnoreCase("title")) {
-			boolean result = false;
-
-			System.out.println("Enter the book title to be searched");
-			getbook = new Scanner(System.in);
-			String getTitleofBook = getbook.nextLine();
-			System.out.println(getTitleofBook);
-			for (Book htmlBook : HTMLBooks) {
-
-				if (htmlBook.getTitle().equalsIgnoreCase(getTitleofBook)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + htmlBook.getTitle() + "the book price is"
-							+ htmlBook.getPrice() + "the number of pages in books are" + htmlBook.getNoOfPages()
-							+ "the book is written by the author " + htmlBook.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-		}
-		if (GetCatagory == 3 && getInput.equalsIgnoreCase("author")) {
-			boolean getResultForBookTittle1 = false;
-			System.out.println("Enter the book Book Author to be searched");
-			getbook = new Scanner(System.in);
-			String getAuthor = getbook.nextLine();
-
-			for (Book htmlBook : HTMLBooks) {
-
-				if (htmlBook.getAuthor().equalsIgnoreCase(getAuthor)) {
-					getResultForBookTittle1 = true;
-					System.out.println("the book with this author is avalible");
-					System.out.println("the book name is " + htmlBook.getTitle() + "the book price is"
-							+ htmlBook.getPrice() + "the number of pages in books are" + htmlBook.getNoOfPages()
-							+ "the book is written by the author " + htmlBook.getAuthor());
-					break;
-				} else {
-					getResultForBookTittle1 = false;
-				}
-
-			}
-			if (getResultForBookTittle1 == false) {
-				System.out.println("the book with this author is not avalible");
-			}
-		}
-		if (GetCatagory == 4 && getInput.equalsIgnoreCase("isbn")) {
-			boolean result = false;
-
-			System.out.println("Enter the book ISBN to be searched");
-			getbook = new Scanner(System.in);
-			String getISBNofBook = getbook.nextLine();
-			System.out.println(getISBNofBook);
-			for (Book springBook : SpringBooks) {
-
-				if (springBook.getIsbn().equalsIgnoreCase(getISBNofBook)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + springBook.getTitle() + "the book price is"
-							+ springBook.getPrice() + "the number of pages in books are" + springBook.getNoOfPages()
-							+ "the book is written by the author " + springBook.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-
-		}
-		if (GetCatagory == 4 && getInput.equalsIgnoreCase("title")) {
-			boolean result = false;
-
-			System.out.println("Enter the book title to be searched");
-			getbook = new Scanner(System.in);
-			String getTitleofBook = getbook.nextLine();
-			System.out.println(getTitleofBook);
-			for (Book springBook : SpringBooks) {
-
-				if (springBook.getTitle().equalsIgnoreCase(getTitleofBook)) {
-					result = true;
-					System.out.println("the book is avalible");
-					System.out.println("the book name is " + springBook.getTitle() + "the book price is"
-							+ springBook.getPrice() + "the number of pages in books are" + springBook.getNoOfPages()
-							+ "the book is written by the author " + springBook.getAuthor());
-					break;
-				} else {
-					result = false;
-				}
-
-			}
-			if (result == false) {
-				System.out.println("the book is not avalible");
-
-			}
-		}
-		if (GetCatagory == 4 && getInput.equalsIgnoreCase("author")) {
-			boolean getResultForBookTittle1 = false;
-			System.out.println("Enter the book Book Author to be searched");
-			getbook = new Scanner(System.in);
-			String getAuthor = getbook.nextLine();
-
-			for (Book springBook : SpringBooks) {
-
-				if (springBook.getAuthor().equalsIgnoreCase(getAuthor)) {
-					getResultForBookTittle1 = true;
-					System.out.println("the book with this author is avalible");
-					System.out.println("the book name is " + springBook.getTitle() + "the book price is"
-							+ springBook.getPrice() + "the number of pages in books are" + springBook.getNoOfPages()
-							+ "the book is written by the author " + springBook.getAuthor());
-					break;
-				} else {
-					getResultForBookTittle1 = false;
-				}
-
-			}
-			if (getResultForBookTittle1 == false) {
-				System.out.println("the book with this author is not avalible");
-			}
+			break;
+			default:
+				System.out.println("enter the correct code");
+				getInputFromUser();
 		}
 
-		System.out.println(
-				"------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		listBookCatogories();
+
+	}
+
+	public void getCatagories(int SearchBook) {
+try {
+		int getInput = SearchBook;
+
+		switch (getInput) {
+		case 1:
+			getBookByISBN();
+			break;
+		case 2:
+			getBookByTitle();
+			break;
+		case 3:
+			getBookByAuthor();
+			break;
+default :
+	System.err.println("no match found");
+getInputFromUser();
+listBookCatogories(getInput);
+	break;
+		}
+	
+}
+catch (Exception e) {
+	// TODO: handle exception
+	System.err.println("Enter correct Input");
+}
 	}
 
 }
+
+
+
+
+
