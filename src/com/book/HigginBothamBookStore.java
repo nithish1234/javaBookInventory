@@ -1,10 +1,9 @@
 package com.book;
 
-import java.text.BreakIterator;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +11,12 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class HigginBothamBookStore implements BookStore {
-	
+
 	Scanner getbook = new Scanner(System.in);
 
+	String getISBN;
+	String getAuthor;
+	String getTitle;
 	Set<String> categories = new HashSet<>();
 	List<Map<String, List<Book>>> inventory = new ArrayList<Map<String, List<Book>>>();
 	List<Book> javaBooks = new ArrayList<>();
@@ -163,11 +165,25 @@ public class HigginBothamBookStore implements BookStore {
 		return categories;
 	}
 
-	public void getBookByISBN() {
+	public void getInputFromUser() {
+
+		System.out.println("java books press-1");
+		System.out.println("sql books press-2");
+		System.out.println("HTML books press-3");
+		System.out.println("Spring books press-4");
+
+		System.out.println("enter the book catogory");
+		int GetCatagory = getbook.nextInt();
+		listBookCatogories(GetCatagory);
+
+
+	}
+
+	public void getBookByISBN(String getIsbn) {
 		boolean getBookISBN = false;
 		System.out.println("enter the ISBN");
-		getbook = new Scanner(System.in);
-		String getISBN = getbook.nextLine();
+		getISBN = getbook.nextLine();
+if(getIsbn!=null&&getIsbn!="") {
 		for (Book book : selectedBooks) {
 
 			if (book.getIsbn().equalsIgnoreCase(getISBN)) {
@@ -186,28 +202,20 @@ public class HigginBothamBookStore implements BookStore {
 			System.out.println("the book is not avalible");
 
 		}
-		
-	}
-	public void getInputFromUser() {
-		
-		System.out.println("java books press-1");
-		System.out.println("sql books press-2");
-		System.out.println("HTML books press-3");
-		System.out.println("Spring books press-4");
-		
-			System.out.println("enter the book catogory");
-			int GetCatagory = getbook.nextInt();
-			listBookCatogories(GetCatagory);
-	
-		
+}
+else {
+	System.out.println("Isbn cannot be null");
+	getInputFromUser();
+}
+
 	}
 
-	public void getBookByTitle() {
-		
+	public void getBookByTitle(String bookTitle) {
+
 		boolean getBookTitle = false;
 		System.out.println("enter the Title");
-		getbook = new Scanner(System.in);
 		String getTitle = getbook.nextLine();
+		if(getTitle!="") {
 		for (Book book : selectedBooks) {
 
 			if (book.getTitle().equalsIgnoreCase(getTitle)) {
@@ -216,8 +224,12 @@ public class HigginBothamBookStore implements BookStore {
 				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
 						+ "the number of pages in books are" + book.getNoOfPages()
 						+ "the book is written by the author " + book.getAuthor());
+				
 				break;
-			} else {
+				
+			} 
+		
+			else {
 				getBookTitle = false;
 			}
 
@@ -226,15 +238,21 @@ public class HigginBothamBookStore implements BookStore {
 			System.out.println("the book is not avalible");
 
 		}
+		
 	}
+		else {
+			System.out.println("Title cannot be empty");
+			getInputFromUser();
+		}
+	}
+	
 
-	public void getBookByAuthor() {
+	public void getBookByAuthor(String bookAuthor) {
 		System.out.println("enter the author name");
-		getbook = new Scanner(System.in);
-		String getAuthor = getbook.nextLine();
+		getAuthor = getbook.nextLine();
 
 		boolean getResultForBookAuthor = false;
-
+if(getAuthor!=" ") {
 		for (Book book : selectedBooks) {
 
 			if (book.getAuthor().equalsIgnoreCase(getAuthor)) {
@@ -246,81 +264,91 @@ public class HigginBothamBookStore implements BookStore {
 						+ "the book is written by the author " + book.getAuthor());
 
 				break;
-			} else {
+			}
+			else {
 				getResultForBookAuthor = false;
 			}
-
 		}
+		
+
+	
 		if (getResultForBookAuthor == false) {
 			System.out.println("the book is not avalible");
 
 		}
+}
+else {
+	System.out.println("Author name Cannot be empty");
+	getInputFromUser();
+}
+
+
 	}
 
-	public void listBookCatogories(int getBookByCatagory) {
-
+	public List<Book> listBookCatogories(int getBookByCatagory) {
 		int GetCatagory = getBookByCatagory;
 		switch (GetCatagory) {
 		case 1:
 			selectedBooks = javaBooks;
+			System.out.println("you have selected javaBooks ");
 			for (Book books : javaBooks)
-				System.out.println(books);
 
+				return javaBooks;
 			break;
 		case 2:
 			selectedBooks = sqlBooks;
+			System.out.println("you have selected sqlBooks ");
 			for (Book books : sqlBooks)
-				System.out.println(books);
+				return sqlBooks;
 			break;
 		case 3:
 			selectedBooks = HTMLBooks;
+			System.out.println("you have selected HTMLBooks ");
 			for (Book books : HTMLBooks)
-				System.out.println(books);
+				return HTMLBooks;
 			break;
 		case 4:
 			selectedBooks = SpringBooks;
+			System.out.println("you have selected SpringBooks ");
 			for (Book books : SpringBooks)
-				System.out.println(books);
+				return SpringBooks;
 			break;
-			default:
-				System.out.println("enter the correct code");
-				getInputFromUser();
+		default:
+			System.out.println("enter the correct code");
+			getInputFromUser();
 		}
-
+		return HTMLBooks;
 
 	}
 
 	public void getCatagories(int SearchBook) {
-try {
-		int getInput = SearchBook;
+		try {
+			int getInput = SearchBook;
 
-		switch (getInput) {
-		case 1:
-			getBookByISBN();
-			break;
-		case 2:
-			getBookByTitle();
-			break;
-		case 3:
-			getBookByAuthor();
-			break;
-default :
-	System.err.println("no match found");
-getInputFromUser();
-listBookCatogories(getInput);
-	break;
+			switch (getInput) {
+			case 1:
+				getBookByISBN(getISBN);
+
+				break;
+			case 2:
+				getBookByTitle(getTitle);
+				break;
+			case 3:
+
+				getBookByAuthor(getAuthor);
+				break;
+			default:
+				System.err.println("no match found");
+				getInputFromUser();
+				listBookCatogories(getInput);
+				
+				
+				break;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Enter correct Input");
 		}
-	
-}
-catch (Exception e) {
-	// TODO: handle exception
-	System.err.println("Enter correct Input");
-}
 	}
-
 }
-
-
-
-
-
