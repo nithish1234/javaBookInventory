@@ -55,7 +55,6 @@ public class Book implements Serializable {
 		this.noOfPages = noOfPages;
 	}
 
-
 	public double getPrice() {
 		return price;
 	}

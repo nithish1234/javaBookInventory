@@ -35,10 +35,14 @@ public class HigginBothamBookStore implements BookStore {
 
 	private Map<String, List<Book>> JavaCategoryBooks() {
 
-		Book thiningInJava = new Book("Thinking in Java", "1234567890", "Bruce Eckle", 1120, 789.90);
-		Book completeReference = new Book("Complete Rreference Java", "1234567891", "Herbert Schildt", 126, 789.90);
-		Book quickJava = new Book("Quick Java", "1234567892", "Spencer Bharath", 120, 789.90);
-		Book java8Basics = new Book("Java 8 Basics", "1234567893", "Nitish Bharath", 420, 789.90);
+		Book thiningInJava = new Book("Thinking in Java", "1234567890",
+				"Bruce Eckle", 1120, 789.90);
+		Book completeReference = new Book("Complete Rreference Java",
+				"1234567891", "Herbert Schildt", 126, 789.90);
+		Book quickJava = new Book("Quick Java", "1234567892",
+				"Spencer Bharath", 120, 789.90);
+		Book java8Basics = new Book("Java 8 Basics", "1234567893",
+				"Nitish Bharath", 420, 789.90);
 
 		javaBooks.add(thiningInJava);
 		javaBooks.add(completeReference);
@@ -53,14 +57,18 @@ public class HigginBothamBookStore implements BookStore {
 
 	private Map<String, List<Book>> sqlCategoryBooks() {
 
-		Book introToSql = new Book("Introducing Microsoft SQL Server 2014 (2014)", "sql4567890", "Ross Mistry", 1120,
-				789.90);
-		Book MicrosoftSQLServer = new Book("Microsoft SQL Server 2012 Internals (2013)", "sql67891", "Kalen Delaney",
-				126, 789.90);
-		Book SQLServer2012 = new Book("SQL Server 2012 Query Performance Tuning", "12345sql", "Wayne Sheffield", 120,
-				789.90);
-		Book SQLServer2012TSQLRecipes = new Book("SQL Server 2012 T-SQL Recipes 3rd Edition (2012)", "sqlpp4567",
-				"Wayne Sheffield", 420, 789.90);
+		Book introToSql = new Book(
+				"Introducing Microsoft SQL Server 2014 (2014)", "sql4567890",
+				"Ross Mistry", 1120, 789.90);
+		Book MicrosoftSQLServer = new Book(
+				"Microsoft SQL Server 2012 Internals (2013)", "sql67891",
+				"Kalen Delaney", 126, 789.90);
+		Book SQLServer2012 = new Book(
+				"SQL Server 2012 Query Performance Tuning", "12345sql",
+				"Wayne Sheffield", 120, 789.90);
+		Book SQLServer2012TSQLRecipes = new Book(
+				"SQL Server 2012 T-SQL Recipes 3rd Edition (2012)",
+				"sqlpp4567", "Wayne Sheffield", 420, 789.90);
 
 		sqlBooks.add(introToSql);
 		sqlBooks.add(MicrosoftSQLServer);
@@ -75,12 +83,15 @@ public class HigginBothamBookStore implements BookStore {
 
 	private Map<String, List<Book>> HTMLCategoryBooks() {
 
-		Book DesignandBuildWebsites = new Book("Design and Build Websites", "HTML4567890", "Jon Duckett", 1120,
-				1789.90);
-		Book ThinkinginHTMLeBook = new Book("Thinking in HTML eBook", "HTML67891", "Aravind Shenoy", 126, 789.90);
-		Book TheSimplifiedBeginnersGuideToHTML = new Book("The Simplified Beginner's Guide To HTML", "12345HTML",
+		Book DesignandBuildWebsites = new Book("Design and Build Websites",
+				"HTML4567890", "Jon Duckett", 1120, 1789.90);
+		Book ThinkinginHTMLeBook = new Book("Thinking in HTML eBook",
+				"HTML67891", "Aravind Shenoy", 126, 789.90);
+		Book TheSimplifiedBeginnersGuideToHTML = new Book(
+				"The Simplified Beginner's Guide To HTML", "12345HTML",
 				"ClydeBank Technology", 1120, 1789.90);
-		Book LearnHTMLandCSSfaster = new Book("Learn HTML and CSS faster", "HTMLpp4567", "Mark Myers", 4120, 1789.90);
+		Book LearnHTMLandCSSfaster = new Book("Learn HTML and CSS faster",
+				"HTMLpp4567", "Mark Myers", 4120, 1789.90);
 
 		HTMLBooks.add(DesignandBuildWebsites);
 		HTMLBooks.add(ThinkinginHTMLeBook);
@@ -95,11 +106,15 @@ public class HigginBothamBookStore implements BookStore {
 
 	private Map<String, List<Book>> SpringCategoryBooks() {
 
-		Book SpringMVC = new Book("Spring MVC: Beginner's Guide", "SPR4567890", "Amuthan G", 2120, 1089.90);
-		Book GettingstartedwithSpringFramework = new Book("Getting started with Spring Framework ", "SPR67891",
+		Book SpringMVC = new Book("Spring MVC: Beginner's Guide", "SPR4567890",
+				"Amuthan G", 2120, 1089.90);
+		Book GettingstartedwithSpringFramework = new Book(
+				"Getting started with Spring Framework ", "SPR67891",
 				"J. Sharma", 126, 789.90);
-		Book SpringinAction = new Book("Spring in Action (3rd Edition)", "12345SPR", "Craig Walls", 1120, 189.90);
-		Book SpringinPractice = new Book("Spring in Practice", "SPR334567", "Joshua White", 4120, 1789.90);
+		Book SpringinAction = new Book("Spring in Action (3rd Edition)",
+				"12345SPR", "Craig Walls", 1120, 189.90);
+		Book SpringinPractice = new Book("Spring in Practice", "SPR334567",
+				"Joshua White", 4120, 1789.90);
 
 		SpringBooks.add(SpringMVC);
 		SpringBooks.add(GettingstartedwithSpringFramework);
@@ -147,8 +162,8 @@ public class HigginBothamBookStore implements BookStore {
 			while (itr.hasNext()) {
 				Map<String, List<Book>> categoryWiseBook = itr.next();
 				if (categoryWiseBook.get(category) != null) {
-					System.out.println(
-							"Books in the category : " + category + " are : " + categoryWiseBook.get(category));
+					System.out.println("Books in the category : " + category
+							+ " are : " + categoryWiseBook.get(category));
 					break;
 				}
 			}
@@ -176,37 +191,38 @@ public class HigginBothamBookStore implements BookStore {
 		int GetCatagory = getbook.nextInt();
 		listBookCatogories(GetCatagory);
 
-
 	}
 
 	public void getBookByISBN(String getIsbn) {
 		boolean getBookISBN = false;
 		System.out.println("enter the ISBN");
 		getISBN = getbook.nextLine();
-if(getIsbn!=null&&getIsbn!="") {
-		for (Book book : selectedBooks) {
+		if (getIsbn != null && getIsbn != "") {
+			for (Book book : selectedBooks) {
 
-			if (book.getIsbn().equalsIgnoreCase(getISBN)) {
-				getBookISBN = true;
-				System.out.println("the book is avalible");
-				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-						+ "the number of pages in books are" + book.getNoOfPages()
-						+ "the book is written by the author " + book.getAuthor());
-				break;
-			} else {
-				getBookISBN = false;
+				if (book.getIsbn().equalsIgnoreCase(getISBN)) {
+					getBookISBN = true;
+					System.out.println("the book is avalible");
+					System.out.println("the book name is " + book.getTitle()
+							+ "the book price is" + book.getPrice()
+							+ "the number of pages in books are"
+							+ book.getNoOfPages()
+							+ "the book is written by the author "
+							+ book.getAuthor());
+					break;
+				} else {
+					getBookISBN = false;
+				}
+
 			}
+			if (getBookISBN == false) {
+				System.out.println("the book is not avalible");
 
+			}
+		} else {
+			System.out.println("Isbn cannot be null");
+			getInputFromUser();
 		}
-		if (getBookISBN == false) {
-			System.out.println("the book is not avalible");
-
-		}
-}
-else {
-	System.out.println("Isbn cannot be null");
-	getInputFromUser();
-}
 
 	}
 
@@ -215,73 +231,72 @@ else {
 		boolean getBookTitle = false;
 		System.out.println("enter the Title");
 		String getTitle = getbook.nextLine();
-		if(getTitle!="") {
-		for (Book book : selectedBooks) {
+		if (getTitle != "") {
+			for (Book book : selectedBooks) {
 
-			if (book.getTitle().equalsIgnoreCase(getTitle)) {
-				getBookTitle = true;
-				System.out.println("the book is avalible");
-				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
-						+ "the number of pages in books are" + book.getNoOfPages()
-						+ "the book is written by the author " + book.getAuthor());
-				
-				break;
-				
-			} 
-		
-			else {
-				getBookTitle = false;
+				if (book.getTitle().equalsIgnoreCase(getTitle)) {
+					getBookTitle = true;
+					System.out.println("the book is avalible");
+					System.out.println("the book name is " + book.getTitle()
+							+ "the book price is" + book.getPrice()
+							+ "the number of pages in books are"
+							+ book.getNoOfPages()
+							+ "the book is written by the author "
+							+ book.getAuthor());
+
+					break;
+
+				}
+
+				else {
+					getBookTitle = false;
+				}
+
+			}
+			if (getBookTitle == false) {
+				System.out.println("the book is not avalible");
+
 			}
 
-		}
-		if (getBookTitle == false) {
-			System.out.println("the book is not avalible");
-
-		}
-		
-	}
-		else {
+		} else {
 			System.out.println("Title cannot be empty");
 			getInputFromUser();
 		}
 	}
-	
 
 	public void getBookByAuthor(String bookAuthor) {
 		System.out.println("enter the author name");
 		getAuthor = getbook.nextLine();
 
 		boolean getResultForBookAuthor = false;
-if(getAuthor!=" ") {
-		for (Book book : selectedBooks) {
+		if (getAuthor != " ") {
+			for (Book book : selectedBooks) {
 
-			if (book.getAuthor().equalsIgnoreCase(getAuthor)) {
-				getResultForBookAuthor = true;
-				System.out.println("the book is avalible");
-				System.out.println("the book name is " + book.getTitle() + "the book price is" + book.getPrice()
+				if (book.getAuthor().equalsIgnoreCase(getAuthor)) {
+					getResultForBookAuthor = true;
+					System.out.println("the book is avalible");
+					System.out.println("the book name is " + book.getTitle()
+							+ "the book price is" + book.getPrice()
 
-						+ "the number of pages in books are" + book.getNoOfPages()
-						+ "the book is written by the author " + book.getAuthor());
+							+ "the number of pages in books are"
+							+ book.getNoOfPages()
+							+ "the book is written by the author "
+							+ book.getAuthor());
 
-				break;
+					break;
+				} else {
+					getResultForBookAuthor = false;
+				}
 			}
-			else {
-				getResultForBookAuthor = false;
+
+			if (getResultForBookAuthor == false) {
+				System.out.println("the book is not avalible");
+
 			}
+		} else {
+			System.out.println("Author name Cannot be empty");
+			getInputFromUser();
 		}
-		
-
-	
-		if (getResultForBookAuthor == false) {
-			System.out.println("the book is not avalible");
-
-		}
-}
-else {
-	System.out.println("Author name Cannot be empty");
-	getInputFromUser();
-}
-
 
 	}
 
@@ -341,8 +356,7 @@ else {
 				System.err.println("no match found");
 				getInputFromUser();
 				listBookCatogories(getInput);
-				
-				
+
 				break;
 			}
 
