@@ -1,6 +1,5 @@
-package com.book;
+package com.book.bookinterfaceimpl;
 
-import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import com.book.bookinterface.BookStore;
+import com.book.objects.Book;
 
 public class HigginBothamBookStore implements BookStore {
 

@@ -1,6 +1,9 @@
-package com.book;
+package com.book.main;
 
 import java.util.Scanner;
+
+import com.book.bookinterface.BookStore;
+import com.book.bookinterfaceimpl.HigginBothamBookStore;
 
 public class MyBookStoreApplication {
 

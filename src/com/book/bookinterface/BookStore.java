@@ -1,6 +1,8 @@
-package com.book;
+package com.book.bookinterface;
 
 import java.util.List;
+
+import com.book.objects.Book;
 
 public interface BookStore {
 

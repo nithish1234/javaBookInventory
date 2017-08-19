@@ -1,4 +1,4 @@
-package com.book;
+package com.book.objects;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class Book implements Serializable {
 	Book() {
 	}
 
-	Book(String title, String isbn, String author, int noOfPages, double price) {
+	public Book(String title, String isbn, String author, int noOfPages, double price) {
 		this.title = title;
 		this.isbn = isbn;
 		this.author = author;
